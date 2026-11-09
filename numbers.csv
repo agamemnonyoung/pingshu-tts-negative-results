@@ -1,0 +1,75 @@
+category,metric,value,unit,condition,source
+corpus,episodes,238,count,合集全集,episodes.tsv
+corpus,total_duration,263.5,hours,238 集合计,durations
+corpus,total_size,6.23,GB,m4a 原始,磁盘统计
+corpus,bitrate,53.8,kbps,AAC-LC 48kHz 立体声,ffprobe
+corpus,true_peak,1.4,dBFS,整片,ffmpeg ebur128
+corpus,mean_volume,-16.8,dB,整片,ffmpeg volumedetect
+corpus,lra,7.3,LU,整片,ffmpeg ebur128
+quality,noise_floor_p10,-70.5,dB,238 集,3 窗口取样
+quality,noise_floor_p50,-60.7,dB,238 集,3 窗口取样
+quality,noise_floor_p90,-38.3,dB,238 集,3 窗口取样
+quality,pesq_min,0.43,score,SQUIM_OBJECTIVE,10 窗口/集
+quality,pesq_p10,0.49,score,SQUIM_OBJECTIVE,10 窗口/集
+quality,pesq_median,0.81,score,SQUIM_OBJECTIVE,10 窗口/集
+quality,pesq_p75,0.91,score,SQUIM_OBJECTIVE,10 窗口/集
+quality,pesq_max,0.96,score,SQUIM_OBJECTIVE,10 窗口/集
+quality,threshold_usable,0.715,score,二分阈值,人工标注拟合
+quality,group_usable,141,count,>=0.715,分档结果
+quality,group_pending,8,count,人工未定,分档结果
+quality,group_bad,89,count,<0.715,分档结果
+quality,human_labels_total,112,count,79+33 两轮,人工标注
+quality,labels_usable_pesq_median,0.903,score,88 条被接受,人工标注
+quality,labels_rejected_pesq_median,0.559,score,14 条被否,人工标注
+quality,round2_boundary,0.7135,score,#2/#3 分界,人工标注
+asr,gold_window,1224,seconds,第 220 集 700-1924s,评测窗口
+asr,gold_sentences,395,count,评测窗口,paraformer 分句
+asr,gold_chars,3252,count,人工定稿,人工校对
+asr,human_edits,142,count,人工校对,校对表
+asr,sentence_error_rate,36,percent,142/395,人工标注
+asr,char_edit_rate,19.6,percent,624 字位,人工标注
+asr,paraformer_cer_full,16.6,percent,全窗,FunASR
+asr,paraformer_cer_142,47.7,percent,142 句,FunASR
+asr,paraformer_exact_142,2,count,142 句,FunASR
+asr,qwen3asr_cer_full,24.0,percent,全窗,Qwen3-ASR-1.7B
+asr,qwen3asr_cer_142,38.4,percent,142 句,Qwen3-ASR-1.7B
+asr,qwen3asr_exact_142,18,count,142 句,Qwen3-ASR-1.7B
+asr,whisper_cer_vad,43.1,percent,全窗,large-v3 int8_float16
+asr,whisper_cer_novad,35.1,percent,全窗,large-v3 int8_float16
+asr,whisper_chars_novad,2982,count,全窗(金标 3252),large-v3
+asr,vote_cer_full,19.7,percent,全窗,三模型投票
+asr,vote_cer_142,40.0,percent,142 句,三模型投票
+asr,llm_gain,0.6,percent,全窗,paraformer+9B 纠错
+asr,err_heterophone,174,count,142 处,人工分类
+asr,err_insert,34,count,142 处,人工分类
+asr,err_delete,27,count,142 处,人工分类
+asr,err_homophone,7,count,142 处,人工分类
+asr,flag_recall,13,percent,142 处,双 ASR 标黄
+asr,flag_precision,90,percent,标黄句,双 ASR 标黄
+asr,speed_paraformer,25,x realtime,CPU 8 线程,实测
+asr,speed_qwen3asr,16,x realtime,GPU 60s 分块,实测
+asr,speed_whisper,16.5,x realtime,整集 63 分钟/229s,实测
+denoise,pesq_ep23_original,0.515,score,40s 片段,集 23
+denoise,pesq_ep23_df20,0.723,score,-a 20,DF3
+denoise,pesq_ep92_original,0.423,score,40s 片段,集 92
+denoise,pesq_ep92_df20,0.451,score,-a 20,DF3
+denoise,pesq_ep23_re_enhance,0.966,score,生成式增强,Resemble-Enhance
+denoise,pesq_ep92_re_enhance,0.902,score,生成式增强,Resemble-Enhance
+denoise,melcorr_ep92_re_enhance,0.320,corr,生成式增强,Resemble-Enhance
+denoise,cer_after_df,30.2,percent,DF20→paraformer,金标窗口
+denoise,cer_before_df,17.2,percent,原音→paraformer,金标窗口
+tts,indextts_vram,4.94,GB,推理峰值,RTX 4060 Ti
+tts,indextts_rtf,10-12,x realtime,s2mel 25 步扩散,实测
+tts,indextts_duration_factor_1.6,68.89,seconds,同段文本,原声 60s
+tts,indextts_timbre_score,5,of 10,人工听感,单次评测
+gpt-sovits,ref_audio_min,3,seconds,硬编码检查,TTS.py:918
+gpt-sovits,ref_audio_max,10,seconds,硬编码检查,TTS.py:918
+gpt-sovits,training_slices,504,count,40.6 分钟,两部书各一段
+gpt-sovits,label_time,55.9,seconds,504 段,SenseVoice
+gpt-sovits,zero_shot_len_ref_slow,11.64,seconds,24 字句,慢速参考
+gpt-sovits,zero_shot_len_ref_fast,7.24,seconds,24 字句,常规参考
+breeze,vram,4,GB,q8_0 3.4GB 权重,实测
+breeze,rtf,1.6-2.0,x realtime,24kHz,实测
+breeze,cfg_usable_max,1.5,score,>=1.8 丢字,cfg 扫描
+breeze,instr_duration_fast,10.7,seconds,紧张指令,同段文本
+breeze,instr_duration_slow,15.6,seconds,舒缓指令,同段文本
